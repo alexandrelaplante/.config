@@ -83,16 +83,33 @@
       :map mc/keymap
       "<return>" nil)
 
+(custom-set-variables
+ '(py-shell-switch-buffers-on-execute nil))
+
+(defun al/delete-current-line ()
+  "Delete (not kill) the current line."
+  (interactive)
+  (save-excursion
+    (delete-region
+     (progn (forward-visible-line 0) (point))
+     (progn (forward-visible-line 1) (point)))))
+
+(map! :after python
+      :map python-mode-map
+      ;; "C-'" #'run-python
+      "C-'" #'python-shell-send-buffer)
+
 (map! "C-p" #'projectile-find-file
       "C-e" #'treemacs
       "C-d" #'mc/mark-next-like-this
       "C-S-d" #'mc/mark-all-like-this
       "C-f" #'isearch-forward
       "C-s" #'save-buffer
-      "C-/" #'comment-region
+      "C-/" #'comment-or-uncomment-region
       "C-w" #'kill-buffer
-      ;; "C-v" #'yank
       "C-z" #'undo-fu-only-undo
       "C-S-z" #'undo-fu-only-redo
       "C-a" #'mark-whole-buffer
+      "C-<tab>" #'+vertico/switch-workspace-buffer
+      "S-<delete>" #'al/delete-current-line
       )
