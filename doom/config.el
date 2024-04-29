@@ -112,4 +112,5 @@
       "C-a" #'mark-whole-buffer
       "C-<tab>" #'+vertico/switch-workspace-buffer
       "S-<delete>" #'al/delete-current-line
+      "C-S-f" #'+default/search-project
       )
