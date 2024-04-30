@@ -86,6 +86,11 @@
 (custom-set-variables
  '(py-shell-switch-buffers-on-execute nil))
 
+(setq projectile-enable-caching nil)
+
+(after! treemacs
+  (treemacs-follow-mode 1))
+
 (defun al/delete-current-line ()
   "Delete (not kill) the current line."
   (interactive)
