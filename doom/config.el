@@ -88,29 +88,51 @@
 
 (setq projectile-enable-caching nil)
 
+(setq isearch-wrap-pause 'no)
+
 (after! treemacs
   (treemacs-follow-mode 1))
 
 (defun al/delete-current-line ()
-  "Delete (not kill) the current line."
   (interactive)
-  (save-excursion
-    (delete-region
-     (progn (forward-visible-line 0) (point))
-     (progn (forward-visible-line 1) (point)))))
+  (let (beg end)
+    (if (region-active-p)
+        (progn
+          (setq beg (region-beginning) end (region-end))
+          (save-excursion
+            (setq beg (progn (goto-char beg) (line-beginning-position))
+                  end (progn (goto-char end) (line-end-position))))
+          (delete-region beg end)
+          (delete-line)
+          )
+      (save-excursion
+        (delete-region
+         (progn (forward-visible-line 0) (point))
+         (progn (forward-visible-line 1) (point))))
+      )))
+
+(defun al/comment-line ()
+  (interactive)
+  (comment-line nil)
+  (setq deactivate-mark nil))
 
 (map! :after python
       :map python-mode-map
       ;; "C-'" #'run-python
       "C-'" #'python-shell-send-buffer)
 
+(map! :map isearch-mode-map
+      "C-r" #'isearch-repeat-backward
+      "C-f" #'isearch-repeat-forward)
+
 (map! "C-p" #'projectile-find-file
       "C-e" #'treemacs
       "C-d" #'mc/mark-next-like-this
       "C-S-d" #'mc/mark-all-like-this
       "C-f" #'isearch-forward
+      "C-r" #'isearch-backward
       "C-s" #'save-buffer
-      "C-/" #'comment-or-uncomment-region
+      "C-/" #'al/comment-line
       "C-w" #'kill-buffer
       "C-z" #'undo-fu-only-undo
       "C-S-z" #'undo-fu-only-redo
