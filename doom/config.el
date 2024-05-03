@@ -153,7 +153,9 @@
       "C-'" #'python-shell-send-buffer)
 
 (map! :map isearch-mode-map
+      "C-v" #'isearch-yank-kill
       "C-r" #'isearch-repeat-backward
+      "C-S-f" #'isearch-repeat-backward
       "C-f" #'isearch-repeat-forward)
 
 (map! "C-p" #'projectile-find-file
