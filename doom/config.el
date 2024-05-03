@@ -86,9 +86,9 @@
 (custom-set-variables
  '(py-shell-switch-buffers-on-execute nil))
 
-(setq projectile-enable-caching nil)
-
-(setq isearch-wrap-pause 'no)
+(setq projectile-enable-caching nil
+      comment-empty-lines t
+      isearch-wrap-pause 'no)
 
 (after! treemacs
   (treemacs-follow-mode 1))
@@ -111,10 +111,20 @@
          (progn (forward-visible-line 1) (point))))
       )))
 
+(defun al/current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at-p "[[:blank:]]*$")))
+
 (defun al/comment-line ()
   (interactive)
-  (comment-line nil)
-  (setq deactivate-mark nil))
+  (if (and (al/current-line-empty-p) (not (region-active-p)))
+      (sp-comment)
+    (save-excursion
+      (comment-line nil)
+      (setq deactivate-mark nil)
+      )
+    ))
 
 (map! :after python
       :map python-mode-map
