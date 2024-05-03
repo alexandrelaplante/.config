@@ -126,8 +126,29 @@
       )
     ))
 
+(defun al/indent-right ()
+  (interactive)
+  (if (region-active-p)
+      (save-excursion
+        (indent-rigidly-right-to-tab-stop (region-beginning) (region-end))
+        (setq deactivate-mark nil)
+        )
+    (doom/dumb-indent)
+    ))
+
+(defun al/indent-left ()
+  (interactive)
+  (if (region-active-p)
+      (save-excursion
+        (indent-rigidly-left-to-tab-stop (region-beginning) (region-end))
+        (setq deactivate-mark nil)
+        )
+    (doom/dumb-dedent)
+    ))
+
 (map! :after python
       :map python-mode-map
+      "<backtab>" nil
       ;; "C-'" #'run-python
       "C-'" #'python-shell-send-buffer)
 
@@ -150,4 +171,6 @@
       "C-<tab>" #'+vertico/switch-workspace-buffer
       "S-<delete>" #'al/delete-current-line
       "C-S-f" #'+default/search-project
+      "<tab>" #'al/indent-right
+      "<backtab>" #'al/indent-left
       )
