@@ -175,4 +175,6 @@
       "C-S-f" #'+default/search-project
       "<tab>" #'al/indent-right
       "<backtab>" #'al/indent-left
+      "C-=" #'doom/increase-font-size
+      "C--" #'doom/decrease-font-size
       )
