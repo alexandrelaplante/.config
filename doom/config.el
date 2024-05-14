@@ -86,6 +86,10 @@
 (custom-set-variables
  '(py-shell-switch-buffers-on-execute nil))
 
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?_ "w")))
+
 (setq projectile-enable-caching nil
       comment-empty-lines t
       isearch-wrap-pause 'no)
