@@ -78,6 +78,7 @@
 (cua-mode +1)
 
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-e"))
 
 (map! :after multiple-cursors-core
       :map mc/keymap
@@ -130,11 +131,25 @@
       )
     ))
 
+(defun al/region-line-beginning ()
+  (save-excursion
+    (goto-char (region-beginning))
+    (line-beginning-position)
+    )
+  )
+
+(defun al/region-line-end ()
+  (save-excursion
+    (goto-char (region-end))
+    (line-end-position)
+    )
+  )
+
 (defun al/indent-right ()
   (interactive)
   (if (region-active-p)
       (save-excursion
-        (indent-rigidly-right-to-tab-stop (region-beginning) (region-end))
+        (indent-rigidly-right-to-tab-stop (al/region-line-beginning) (al/region-line-end))
         (setq deactivate-mark nil)
         )
     (doom/dumb-indent)
@@ -144,11 +159,25 @@
   (interactive)
   (if (region-active-p)
       (save-excursion
-        (indent-rigidly-left-to-tab-stop (region-beginning) (region-end))
+        (indent-rigidly-left-to-tab-stop (al/region-line-beginning) (al/region-line-end))
         (setq deactivate-mark nil)
         )
     (doom/dumb-dedent)
     ))
+
+;; (defun al/forward-paragraph ()
+;;   (interactive)
+;;   (goto-char (+ (point) 1))
+;;   (forward-paragraph)
+;;   (goto-char (- (point) 1))
+;;   )
+;; 
+;; (defun al/backward-paragraph ()
+;;   (interactive)
+;;   (goto-char (- (point) 1))
+;;   (backward-paragraph)
+;;   (goto-char (+ (point) 1))
+;;   )
 
 (map! :after python
       :map python-mode-map
@@ -157,8 +186,12 @@
       "C-'" #'python-shell-send-buffer)
 
 (map! :after magit
+      :map magit-mode-map
+      "C-g" #'+magit/quit
+      )
+
+(map! :after magit
       :map magit-blame-mode-map
-      "C-g" #'magit-blame-quit
       "C-b" #'magit-blame-quit
       )
 
@@ -168,8 +201,15 @@
       "C-S-f" #'isearch-repeat-backward
       "C-f" #'isearch-repeat-forward)
 
+(map! :prefix "C-b"
+      "b" #'magit-blame-addition
+      "<delete>" #'+vc-gutter/revert-hunk
+      "<down>" #'+vc-gutter/next-hunk
+      "<up>" #'+vc-gutter/previous-hunk
+      )
+
 (map! "C-p" #'projectile-find-file
-      "C-e" #'treemacs
+      "C-E" #'treemacs
       "C-d" #'mc/mark-next-like-this
       "C-S-d" #'mc/mark-all-like-this
       "C-f" #'isearch-forward
@@ -187,5 +227,7 @@
       "<backtab>" #'al/indent-left
       "C-=" #'doom/increase-font-size
       "C--" #'doom/decrease-font-size
-      "C-b" #'magit-blame-addition
+      "C-N" #'doom/toggle-narrow-buffer
+      ;; "C-<down>" #'al/forward-paragraph
+      ;; "C-<up>" #'al/backward-paragraph
       )
