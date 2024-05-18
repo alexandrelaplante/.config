@@ -156,6 +156,12 @@
       ;; "C-'" #'run-python
       "C-'" #'python-shell-send-buffer)
 
+(map! :after magit
+      :map magit-blame-mode-map
+      "C-g" #'magit-blame-quit
+      "C-b" #'magit-blame-quit
+      )
+
 (map! :map isearch-mode-map
       "C-v" #'isearch-yank-kill
       "C-r" #'isearch-repeat-backward
@@ -181,4 +187,5 @@
       "<backtab>" #'al/indent-left
       "C-=" #'doom/increase-font-size
       "C--" #'doom/decrease-font-size
+      "C-b" #'magit-blame-addition
       )
