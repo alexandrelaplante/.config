@@ -98,6 +98,13 @@
 (after! treemacs
   (treemacs-follow-mode 1))
 
+(after! format
+  (require 'apheleia)
+  (setf (alist-get 'python-mode apheleia-mode-alist)
+        '(ruff))
+  )
+
+
 (defun al/delete-current-line ()
   (interactive)
   (let (beg end)
