@@ -195,9 +195,6 @@
 (map! :after magit
       :map magit-mode-map
       "C-g" #'+magit/quit
-      )
-
-(map! :after magit
       :map magit-blame-mode-map
       "C-b" #'magit-blame-quit
       )
