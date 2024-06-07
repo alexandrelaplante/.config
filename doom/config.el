@@ -93,7 +93,9 @@
 
 (setq projectile-enable-caching nil
       comment-empty-lines t
-      isearch-wrap-pause 'no)
+      isearch-wrap-pause 'no
+      avy-all-windows t
+      )
 
 (after! treemacs
   (treemacs-follow-mode 1))
@@ -207,6 +209,7 @@
 
 (map! :prefix "C-b"
       "b" #'magit-blame-addition
+      "s" #'magit-status
       "<delete>" #'+vc-gutter/revert-hunk
       "<down>" #'+vc-gutter/next-hunk
       "<up>" #'+vc-gutter/previous-hunk
@@ -232,6 +235,7 @@
       "C-=" #'doom/increase-font-size
       "C--" #'doom/decrease-font-size
       "C-N" #'doom/toggle-narrow-buffer
+      "M-f" #'avy-goto-char-timer
       ;; "C-<down>" #'al/forward-paragraph
       ;; "C-<up>" #'al/backward-paragraph
       )
