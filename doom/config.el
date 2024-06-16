@@ -228,6 +228,10 @@
       "C-S-z" #'undo-fu-only-redo
       "C-a" #'mark-whole-buffer
       "C-<tab>" #'+vertico/switch-workspace-buffer
+      "M-<right>" #'centaur-tabs-forward-tab
+      "M-<left>" #'centaur-tabs-backward-tab
+      "M-S-<right>" #'centaur-tabs-move-current-tab-to-right
+      "M-S-<left>" #'centaur-tabs-move-current-tab-to-left
       "S-<delete>" #'al/delete-current-line
       "C-S-f" #'+default/search-project
       "<tab>" #'al/indent-right
