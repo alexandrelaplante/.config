@@ -80,10 +80,6 @@
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-e"))
 
-(map! :after multiple-cursors-core
-      :map mc/keymap
-      "<return>" nil)
-
 (custom-set-variables
  '(py-shell-switch-buffers-on-execute nil))
 
@@ -95,6 +91,7 @@
       comment-empty-lines t
       isearch-wrap-pause 'no
       avy-all-windows t
+      python-indent-guess-indent-offset nil
       )
 
 (after! treemacs
@@ -105,7 +102,6 @@
   (setf (alist-get 'python-mode apheleia-mode-alist)
         '(ruff))
   )
-
 
 (defun al/delete-current-line ()
   (interactive)
@@ -188,6 +184,13 @@
 ;;   (goto-char (+ (point) 1))
 ;;   )
 
+(map! :after multiple-cursors-core
+      :map mc/keymap
+      "<return>" nil
+      "C-c" #'cua-copy-region
+      "C-v" #'cua-paste
+      )
+
 (map! :after python
       :map python-mode-map
       "<backtab>" nil
@@ -216,7 +219,6 @@
       )
 
 (map! "C-p" #'projectile-find-file
-      "C-E" #'treemacs
       "C-d" #'mc/mark-next-like-this
       "C-S-d" #'mc/mark-all-like-this
       "C-f" #'isearch-forward
@@ -227,7 +229,8 @@
       "C-z" #'undo-fu-only-undo
       "C-S-z" #'undo-fu-only-redo
       "C-a" #'mark-whole-buffer
-      "C-<tab>" #'+vertico/switch-workspace-buffer
+      "C-<tab> e" #'treemacs
+      "C-<tab> <tab>" #'+vertico/switch-workspace-buffer
       "M-<right>" #'centaur-tabs-forward-tab
       "M-<left>" #'centaur-tabs-backward-tab
       "M-S-<right>" #'centaur-tabs-move-current-tab-to-right
@@ -240,6 +243,8 @@
       "C--" #'doom/decrease-font-size
       "C-N" #'doom/toggle-narrow-buffer
       "M-f" #'avy-goto-char-timer
+      "C-e" #'er/expand-region
+      "C-S-e" #'er/contract-region
       ;; "C-<down>" #'al/forward-paragraph
       ;; "C-<up>" #'al/backward-paragraph
       )
