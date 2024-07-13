@@ -184,11 +184,22 @@
 ;;   (goto-char (+ (point) 1))
 ;;   )
 
+(defun al/disable-hs-minor-mode ()
+  (interactive)
+  (hs-minor-mode -1))
+
 (map! :after multiple-cursors-core
       :map mc/keymap
       "<return>" nil
+      "C-x" #'cua-cut-region
       "C-c" #'cua-copy-region
       "C-v" #'cua-paste
+      )
+
+(map! :map hs-minor-mode-map
+      "C-g" #'al/disable-hs-minor-mode
+      "S-<return>" #'hs-hide-all
+      "<return>" #'hs-toggle-hiding
       )
 
 (map! :after python
@@ -245,6 +256,7 @@
       "M-f" #'avy-goto-char-timer
       "C-e" #'er/expand-region
       "C-S-e" #'er/contract-region
+      "C-t" #'hs-minor-mode
       ;; "C-<down>" #'al/forward-paragraph
       ;; "C-<up>" #'al/backward-paragraph
       )
