@@ -1,0 +1,71 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      "ctrl-q": null
+    }
+  },
+
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+      "alt-e": "workspace::ToggleLeftDock",
+      "ctrl-b right": "workspace::ActivatePaneRight",
+      "ctrl-b left": "workspace::ActivatePaneLeft",
+      "ctrl-b up": "workspace::ActivatePaneUp",
+      "ctrl-b down": "workspace::ActivatePaneDown"
+    }
+  },
+
+  {
+    "context": "FileFinder && !menu_open",
+    "bindings": {
+      "ctrl-shift-p": "file_finder::SelectPrevious",
+      // same as tmux
+      "ctrl-b %": "pane::SplitRight",
+      "ctrl-b \"": "pane::SplitDown"
+    }
+  },
+
+  {
+    "context": "Editor",
+    "bindings": {
+      "shift-delete": "editor::DeleteLine",
+      "alt-.": "editor::GoToDefinition",
+      "alt-shift-.": "editor::FindAllReferences",
+      "alt-,": "pane::GoBack",
+      "alt-shift-,": "pane::GoForward",
+      "alt-left": "pane::ActivatePreviousItem",
+      "alt-right": "pane::ActivateNextItem",
+      "alt-shift-right": "pane::SwapItemRight",
+      "alt-shift-left": "pane::SwapItemLeft",
+      // "ctrl-up": ["editor::MoveUpByLines", { "lines": 5 }],
+      // "ctrl-down": ["editor::MoveDownByLines", { "lines": 5 }],
+      // "ctrl-shift-up": ["editor::SelectUpByLines", { "lines": 5 }],
+      // "ctrl-shift-down": ["editor::SelectDownByLines", { "lines": 5 }]
+      "ctrl-up": "editor::MoveToStartOfParagraph",
+      "ctrl-down": "editor::MoveToEndOfParagraph",
+      "ctrl-shift-up": "editor::SelectToStartOfParagraph",
+      "ctrl-shift-down": "editor::SelectToEndOfParagraph",
+      "ctrl-l": "editor::ScrollCursorCenterTopBottom",
+      "ctrl-b": "git::Blame",
+      "ctrl-b b": "git::Blame",
+      "ctrl-e": "editor::SelectLargerSyntaxNode",
+      "ctrl-shift-e": "editor::SelectSmallerSyntaxNode",
+      // same as tmux
+      "ctrl-b %": "pane::SplitRight",
+      "ctrl-b \"": "pane::SplitDown",
+      "ctrl-b right": "workspace::ActivatePaneRight",
+      "ctrl-b left": "workspace::ActivatePaneLeft",
+      "ctrl-b down": "editor::GoToHunk",
+      "ctrl-b up": "editor::GoToPreviousHunk"
+    }
+  }
+]
