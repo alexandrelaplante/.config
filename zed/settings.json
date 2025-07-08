@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "features": {
+    "edit_prediction_provider": "none"
+  },
   "show_edit_predictions": false,
   "languages": {
     // https://docs.astral.sh/ruff/editors/setup/#zed
@@ -29,13 +32,14 @@
     }
   },
   "agent": {
+    "default_profile": "write",
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-3-7-sonnet"
+      "model": "claude-sonnet-4"
     },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3-7-sonnet"
+      "model": "claude-sonnet-4"
     },
     "version": "2"
   },

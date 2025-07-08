@@ -37,6 +37,8 @@
   {
     "context": "Editor",
     "bindings": {
+      "ctrl-d": ["editor::SelectNext", { "replace_newest": false }],
+      "ctrl-shift-d": "editor::SelectAllMatches",
       "shift-delete": "editor::DeleteLine",
       "alt-.": "editor::GoToDefinition",
       "alt-shift-.": "editor::FindAllReferences",
