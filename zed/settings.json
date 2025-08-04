@@ -41,7 +41,6 @@
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
     },
-    "version": "2"
   },
   "telemetry": {
     "diagnostics": true,
