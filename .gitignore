@@ -6,3 +6,6 @@
 !/doom/
 !/zed/
 !/hypr/
+!/waybar/
+waybar/scripts/get_uv.sh
+!starship.toml
