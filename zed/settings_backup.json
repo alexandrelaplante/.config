@@ -10,6 +10,7 @@
   "features": {
     "edit_prediction_provider": "none"
   },
+  "tab_size": 4,
   "show_edit_predictions": false,
   "languages": {
     // https://docs.astral.sh/ruff/editors/setup/#zed
@@ -35,13 +36,12 @@
     "default_profile": "write",
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
+      "model": "gpt-4.1"
     },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
-    },
-    "version": "2"
+      "model": "gpt-5-mini"
+    }
   },
   "telemetry": {
     "diagnostics": true,
@@ -58,7 +58,7 @@
   "theme": {
     "mode": "system",
     "light": "One Dark",
-    "dark": "One Dark"
+    "dark": "Zedokai Darker (Filter Octagon)"
   },
   "preview_tabs": {
     "enable_preview_from_code_navigation": true,
